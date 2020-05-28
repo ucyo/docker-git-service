@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  server:
+    image: gitea/gitea:1.11.5
+    env_file:
+      - ./env/.gitea.env
+    volumes:
+      - /mnt/md0/gitea/data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "222:22"
+    depends_on:
+      - db
+  db:
+    image: postgres:12.3
+    env_file:
+      - ./env/.postgres.env
+    volumes:
+      - /mnt/md0/gitea/postgresql:/var/lib/postgresql/data
