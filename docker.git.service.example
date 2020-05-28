@@ -1,0 +1,13 @@
+[Unit]
+Description=Git Service Container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/local/bin/docker-compose -f /path/to/docker-compose.yaml --project-directory /path/to/ up
+ExecStop=/usr/local/bin/docker-compose -f /path/to/docker-compose.yaml --project-directory /path/to/ stop
+ExecRestart=/usr/local/bin/docker-compose -f /path/to/docker-compose.yaml --project-directory /path/to/ restart
+
+[Install]
+WantedBy=default.target
